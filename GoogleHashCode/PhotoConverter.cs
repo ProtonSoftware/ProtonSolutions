@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace GoogleHashCode
 {
@@ -11,6 +12,8 @@ namespace GoogleHashCode
 
         private string mPath;
         private int mAmount;
+
+        public List<Image> Images { get; set; }
 
         #endregion
 
@@ -26,13 +29,22 @@ namespace GoogleHashCode
 
         #endregion
 
-        public void ReadTextFromFile()
+        public void ReadImagesFromFile()
         {
             var fileLines = File.ReadAllLines(mPath);
             mAmount = int.Parse(fileLines[0]);
             for (int i = 1; i < fileLines.Length; i++)
             {
-                var image = new Image();
+                var elements = fileLines[i].Split(" ");
+                var tags = new List<string>();
+                for (int j = 2; j < elements.Length; j++)
+                {
+                    tags.Add(elements[j]);
+                }
+
+                var image = new Image(elements[0] == "V" ? Orientation.Vertical : Orientation.Horizontal, int.Parse(elements[1]), tags);
+
+                Images.Add(image);
             }
             
         }
