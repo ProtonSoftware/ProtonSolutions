@@ -20,5 +20,14 @@ namespace GoogleHashCode
         {
             elems = imglist;
         }
+
+        public string GetImageOutput()
+        {
+            var output = "";
+            foreach (var image in elems)
+                output += image.Id.ToString() + " ";
+
+            return output;
+        }
     }
 }

@@ -9,6 +9,10 @@ namespace GoogleHashCode
             Console.WriteLine("Hello World!");
 
             var converter = new PhotoConverter("SCIEZKA");
+            converter.ReadImagesFromFile();
+            converter.AttachImagesToSlides();
+            converter.CreateSlideShow();
+            converter.ExportSlideShow();
         }
     }
 }

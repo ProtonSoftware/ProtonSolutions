@@ -14,6 +14,8 @@ namespace GoogleHashCode
         private int mAmount;
 
         public List<Image> Images { get; set; }
+        public List<Slide> Slides { get; set; }
+        public Slideshow Slideshow { get; set; }
 
         #endregion
 
@@ -47,6 +49,28 @@ namespace GoogleHashCode
                 Images.Add(image);
             }
             
+        }
+
+        public void AttachImagesToSlides()
+        {
+
+        }
+
+        public void CreateSlideShow()
+        {
+            Slideshow = new Slideshow(Slides);
+        }
+
+        public void ExportSlideShow()
+        {
+            var path = "result.txt";
+            var lines = new List<string>();
+
+            lines.Add(Slideshow.Amount.ToString());
+            foreach (var slide in Slideshow.Slides)
+                lines.Add(slide.GetImageOutput());
+
+            File.WriteAllLines(path, lines);
         }
     }
 }
