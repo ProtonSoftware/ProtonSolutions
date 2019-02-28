@@ -81,7 +81,9 @@ namespace GoogleHashCode
             for (int i=0; i<iternum; i++)
             {
                 var first = verticalList[i];
-                Helpers.matchVerticals(first, verticalList);
+                var trialSlide = Helpers.matchVerticals(first, verticalList);
+                verticalList.Remove(trialSlide.Elems[1]);
+                Slides.Add(trialSlide);
             }
         }
 
