@@ -20,9 +20,14 @@ namespace GoogleHashCode
         public void Optimize()
         {
             var newOrder = new List<Slide>();
-            var safeCopy = new List<Slide>(Slides);
-            Dictionary<string,int> freqmap = Helpers.GetFrequencyOfTags(Slides);
-            Helpers.FindMaximum(freqmap);
+            var tmp = Slides.SortByTags();
+            int all = tmp.Count;
+            while (tmp.Count > 0)
+            {
+                newOrder.Add(tmp[tmp.Count-1]);
+                newOrder.Add(tmp[0]);
+            }
+            Slides = newOrder;
         }
 
         public int Score()

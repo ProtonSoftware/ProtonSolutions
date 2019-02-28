@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GoogleHashCode
 {
@@ -15,7 +16,7 @@ namespace GoogleHashCode
             return dictionary;
         }
 
-        public static KeyValuePair<string, int> FindMaximum(this Dictionary<string, int> dict)
+        public static string FindMaximum(this Dictionary<string, int> dict)
         {
             string max = null;
             int v = -1;
@@ -27,7 +28,12 @@ namespace GoogleHashCode
                     max = k;
                 }
             }
-            return new KeyValuePair<string, int>(max, v);
+            return max;
+        }
+
+        public static List<Slide> SortByTags(this List<Slide> list)
+        {
+            return list.OrderByDescending(x => x.AmountOfTags).ToList();
         }
     }
 }

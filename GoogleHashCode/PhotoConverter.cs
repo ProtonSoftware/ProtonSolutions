@@ -108,7 +108,7 @@ namespace GoogleHashCode
         {
             var verticalList = Images.Where(x => x.Orientation == Orientation.Vertical).ToList();
 
-
+            return null;
         }
     }
 }
