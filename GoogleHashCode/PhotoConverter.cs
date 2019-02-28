@@ -53,7 +53,14 @@ namespace GoogleHashCode
 
         public void AttachImagesToSlides()
         {
-
+            foreach (var image in Images)
+            {
+                if (image.Orientation == Orientation.Horizontal)
+                {
+                    var slide = new Slide(new List<Image> { image });
+                    Slides.Add(slide);
+                }
+            }
         }
 
         public void CreateSlideShow()
@@ -64,9 +71,10 @@ namespace GoogleHashCode
         public void ExportSlideShow()
         {
             var path = "result.txt";
-            var lines = new List<string>();
-
-            lines.Add(Slideshow.Amount.ToString());
+            var lines = new List<string>
+            {
+                Slideshow.Amount.ToString()
+            };
             foreach (var slide in Slideshow.Slides)
                 lines.Add(slide.GetImageOutput());
 
