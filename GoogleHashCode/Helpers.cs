@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GoogleHashCode
 {
@@ -7,15 +8,25 @@ namespace GoogleHashCode
     /// </summary>
     public static class Helpers
     {
-        public static Dictionary<string, int> GetFrequencyOfTags(this List<ITaggedObject> objects)
+        public static Dictionary<string, int> GetFrequencyOfTags(List<Image> images)
         {
             var dictionary = new Dictionary<string, int>();
 
+            foreach (var image in images)
+            {
+                foreach (var tag in image.Tags)
+                {
+                    if (!dictionary.TryAdd(tag, 1))
+                    {
+                        dictionary[tag]++;
+                    }
+                }
+            }
 
             return dictionary;
         }
 
-        public static KeyValuePair<string, int> FindMaximum(this Dictionary<string, int> dict)
+        public static string FindMaximum(this Dictionary<string, int> dict)
         {
             string max = null;
             int v = -1;
@@ -27,7 +38,12 @@ namespace GoogleHashCode
                     max = k;
                 }
             }
-            return new KeyValuePair<string, int>(max, v);
+            return max;
+        }
+
+        public static List<Slide> SortByTags(this List<Slide> list)
+        {
+            return list.OrderByDescending(x => x.AmountOfTags).ToList();
         }
 
         public static Slide matchVerticals(Image first, List<Image> list)

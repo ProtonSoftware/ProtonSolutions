@@ -107,7 +107,8 @@ namespace GoogleHashCode
         {
             if (mAmountOfVertical % 2 != 0)
             {
-                var imageToDelete = GetBestFittingImageForDeletion();
+                var singleTaggedImages = Images.Where(x => x.Orientation == Orientation.Vertical && x.AmountOfTags == 1).ToList();
+                var imageToDelete = GetBestFittingImageForDeletion(singleTaggedImages);
                 Images.Remove(imageToDelete);
             }
             foreach (var image in Images)
@@ -119,11 +120,11 @@ namespace GoogleHashCode
             }
         }
 
-        private Image GetBestFittingImageForDeletion()
+        private Image GetBestFittingImageForDeletion(List<Image> singleTaggedImages)
         {
-            var verticalList = Images.Where(x => x.Orientation == Orientation.Vertical).ToList();
+            var mostFrequestTag = Helpers.FindMaximum(Helpers.GetFrequencyOfTags(singleTaggedImages));
 
-
+            return singleTaggedImages.Where(x => x.Tags[0] == mostFrequestTag).FirstOrDefault();
         }
     }
 }
