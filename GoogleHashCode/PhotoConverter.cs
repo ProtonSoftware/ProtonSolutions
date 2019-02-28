@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace GoogleHashCode
 {
@@ -53,6 +54,8 @@ namespace GoogleHashCode
 
         public void AttachImagesToSlides()
         {
+            var verticalList = new List<Image>();
+
             foreach (var image in Images)
             {
                 if (image.Orientation == Orientation.Horizontal)
@@ -60,6 +63,19 @@ namespace GoogleHashCode
                     var slide = new Slide(new List<Image> { image });
                     Slides.Add(slide);
                 }
+                else
+                {
+                    verticalList.Add(image);
+                }
+            }
+
+            verticalList.OrderBy(x => x.AmountOfTags);
+
+            var iternum = verticalList.Count/2;
+            for (int i=0; i<iternum; i++)
+            {
+                var first = verticalList[i];
+
             }
         }
 
