@@ -42,7 +42,7 @@ namespace GoogleHashCode
                     tags.Add(elements[j]);
                 }
 
-                var image = new Image(elements[0] == "V" ? Orientation.Vertical : Orientation.Horizontal, int.Parse(elements[1]), tags);
+                var image = new Image(i - 1, elements[0] == "V" ? Orientation.Vertical : Orientation.Horizontal, int.Parse(elements[1]), tags);
 
                 Images.Add(image);
             }

@@ -5,19 +5,11 @@ namespace GoogleHashCode
 {
     public class Slideshow
     {
-        public List<Slide> list {get; set;}
+        public List<Slide> Slides {get; set;}
 
-        public Slideshow(List<Image> imglist)
+        public Slideshow(List<Slide> slides)
         {
-            list = imglist;
-        }
-
-        public void Reorder()
-        {
-        }
-
-        private void Interest(int pos)
-        {
+            Slides = slides;
         }
     }
 }

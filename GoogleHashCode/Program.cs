@@ -7,6 +7,8 @@ namespace GoogleHashCode
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+            var converter = new PhotoConverter("SCIEZKA");
         }
     }
 }
