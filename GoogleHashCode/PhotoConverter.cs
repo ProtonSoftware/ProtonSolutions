@@ -13,6 +13,7 @@ namespace GoogleHashCode
 
         private string mPath;
         private int mAmount;
+        private int mAmountOfVertical = 0;
 
         public List<Image> Images { get; set; }
         public List<Slide> Slides { get; set; }
@@ -47,8 +48,13 @@ namespace GoogleHashCode
 
                 var image = new Image(i - 1, elements[0] == "V" ? Orientation.Vertical : Orientation.Horizontal, int.Parse(elements[1]), tags);
 
+                if (image.Orientation == Orientation.Vertical)
+                    mAmountOfVertical++;
+
                 Images.Add(image);
             }
+
+            RemoveUnneededImages();
             
         }
 
@@ -95,6 +101,29 @@ namespace GoogleHashCode
                 lines.Add(slide.GetImageOutput());
 
             File.WriteAllLines(path, lines);
+        }
+
+        private void RemoveUnneededImages()
+        {
+            if (mAmountOfVertical % 2 != 0)
+            {
+                var imageToDelete = GetBestFittingImageForDeletion();
+                Images.Remove(imageToDelete);
+            }
+            foreach (var image in Images)
+            {
+                if (image.Orientation == Orientation.Horizontal && image.Tags.Count < 2 && mAmount > 1)
+                {
+                    Images.Remove(image);
+                }
+            }
+        }
+
+        private Image GetBestFittingImageForDeletion()
+        {
+            var verticalList = Images.Where(x => x.Orientation == Orientation.Vertical).ToList();
+
+
         }
     }
 }

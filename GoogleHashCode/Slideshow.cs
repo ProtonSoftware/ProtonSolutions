@@ -17,11 +17,30 @@ namespace GoogleHashCode
             Slides = slides;
         }
 
-        private int interest(int pos)
+        public void Optimize()
+        {
+            var newOrder = new List<Slide>();
+            var safeCopy = new List<Slide>(Slides);
+            Dictionary<string,int> freqmap = Helpers.GetFrequencyOfTags(Slides);
+            Helpers.FindMaximum(freqmap);
+        }
+
+        public int Score()
+        {
+            int tmp = 0;
+            for (int i = 0; i < Amount-1; i++)
+                tmp += Interest(i);
+            return tmp;
+        }
+
+        ///<summary>
+        /// Compares slides from pos and pos+1
+        ///</summary>
+        private int Interest(int pos)
         {
             Slide[] compare = new Slide[2];
-            compare[0] = mSlides[pos];
-            compare[1] = mSlides[pos+1];
+            compare[0] = Slides[pos];
+            compare[1] = Slides[pos+1];
             int first = 0, common = 0, second = 0;
             foreach (var t in compare[0].Tags)
             {

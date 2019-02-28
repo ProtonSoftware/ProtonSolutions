@@ -5,7 +5,7 @@ namespace GoogleHashCode
     /// <summary>
     ///
     /// </summary>
-    public class Image
+    public class Image : ITaggedObject
     {
         #region Public Properties
 
