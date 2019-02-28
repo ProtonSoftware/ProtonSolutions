@@ -5,20 +5,23 @@ namespace GoogleHashCode
 {
     public class Slide
     {
-        public List<Image> elems {get; set;}
-        public List<string> Tags {get {
+        private List<Image> mElems;
+        public List<Image> Elems {get {return mElems;} set {
+            mElems = value;
             var tmp = new List<string>();
-            foreach (var e in elems)
+            foreach (var e in mElems)
                 foreach (var t in e.Tags)
                     if (!tmp.Contains(t))
                         tmp.Add(t);
-            return tmp;
+            mTags = tmp;
         }}
-        public int AmountOfTags { get {return Tags.Count;} }
+        private List<string> mTags;
+        public List<string> Tags {get {return mTags;}}
+        public int AmountOfTags { get {return mTags.Count;} }
 
         public Slide(List<Image> imglist)
         {
-            elems = imglist;
+            Elems = imglist;
         }
     }
 }
