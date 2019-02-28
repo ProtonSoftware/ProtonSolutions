@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GoogleHashCode
 {
-    public class Slide
+    public class Slide : ITaggedObject
     {
         private List<Image> mElems;
         public List<Image> Elems {get {return mElems;} set {
