@@ -27,7 +27,7 @@ namespace GoogleHashCode
         public string GetImageOutput()
         {
             var output = "";
-            foreach (var image in elems)
+            foreach (var image in Elems)
                 output += image.Id.ToString() + " ";
 
             return output;
