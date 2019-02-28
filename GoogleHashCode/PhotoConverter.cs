@@ -81,7 +81,7 @@ namespace GoogleHashCode
             for (int i=0; i<iternum; i++)
             {
                 var first = verticalList[i];
-
+                Helpers.matchVerticals(first, verticalList);
             }
         }
 

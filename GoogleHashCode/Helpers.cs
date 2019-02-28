@@ -29,5 +29,46 @@ namespace GoogleHashCode
             }
             return new KeyValuePair<string, int>(max, v);
         }
+
+        public static Slide matchVerticals(Image first, List<Image> list)
+        {
+            List<int> commonElements = new List<int>(list.Count - 1);
+            for (int i = 0; i < list.Count-1; i++)
+            {
+                commonElements[i] = 0;
+            }
+
+            for (int i=1; i<list.Count; i++)
+            {
+                for (int j=0; j<first.AmountOfTags; j++)
+                {
+                    for (int k = 0; k < list[i].AmountOfTags; k++)
+                    {
+                        if (first.Tags[j] == list[i].Tags[k])
+                        {
+                            commonElements[i-1]++;
+                        }
+                    }
+                }
+            }
+
+            int maxValue = 0;
+            foreach (var value in commonElements)
+            {
+                if (value > maxValue)
+                {
+                    maxValue = value;
+                }
+            }
+
+            var second = list[commonElements.IndexOf(maxValue) + 1];
+            var images = new List<Image>
+            {
+                first,
+                second
+            };
+
+            return new Slide(images);
+        }
     }
 }
