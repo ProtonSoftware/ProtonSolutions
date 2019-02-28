@@ -7,10 +7,20 @@ namespace GoogleHashCode
     /// </summary>
     public static class Helpers
     {
-        public static Dictionary<string, int> GetFrequencyOfTags(this List<ITaggedObject> objects)
+        public static Dictionary<string, int> GetFrequencyOfTags(List<Image> images)
         {
             var dictionary = new Dictionary<string, int>();
 
+            foreach (var image in images)
+            {
+                foreach (var tag in image.Tags)
+                {
+                    if (!dictionary.TryAdd(tag, 1))
+                    {
+                        dictionary[tag]++;
+                    }
+                }
+            }
 
             return dictionary;
         }
