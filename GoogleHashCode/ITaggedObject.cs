@@ -7,7 +7,7 @@ namespace GoogleHashCode
     /// </summary>
     public interface ITaggedObject
     {
-        int AmountOfTags { get; set; }
-        List<string> Tags { get; set; }
+        int AmountOfTags { get; }
+        List<string> Tags { get; }
     }
 }
